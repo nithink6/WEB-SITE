@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta-name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample E-Commerce Store</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f3f3f3;
+        }
+        header {
+            background: #111;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .products {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            padding: 20px;
+        }
+        .product-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .product-card img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        button {
+            padding: 10px 15px;
+            margin-top: 10px;
+            border: none;
+            background: #111;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>MyStore</h1>
+    <div class="cart">
+        🛒 <span id="cart-count">0</span>
+    </div>
+</header>
+
+<section class="products" id="product-list">
+    <!-- JS inserts products here -->
+</section>
+
+<script>
+    const products = [
+        { id: 1, name: "Sneakers", price: 49.99,
+          image: "https://images.unsplash.com/photo-1528701800489-20be3c6b040f?auto=format&fit=crop&w=600&q=80" },
+
+        { id: 2, name: "Headphones", price: 29.99,
+          image: "https://images.unsplash.com/photo-1518441902117-fb7ae8b6dcea?auto=format&fit=crop&w=600&q=80" },
+
+        { id: 3, name: "Smart Watch", price: 99.99,
+          image: "https://images.unsplash.com/photo-1517433456452-f9633a875f6f?auto=format&fit=crop&w=600&q=80" }
+    ];
+
+    let cartCount = 0;
+
+    function loadProducts() {
+        const container = document.getElementById("product-list");
+
+        products.forEach(p => {
+            container.innerHTML += `
+                <div class="product-card">
+                    <img src="${p.image}" alt="${p.name}">
+                    <h3>${p.name}</h3>
+                    <p>$${p.price}</p>
+                    <button onclick="addToCart()">Add to Cart</button>
+                </div>
+            `;
+        });
+    }
+
+    function addToCart() {
+        cartCount++;
+        document.getElementById("cart-count").textContent = cartCount;
+    }
+
+    loadProducts();
+</script>
+
+</body>
+</html>
